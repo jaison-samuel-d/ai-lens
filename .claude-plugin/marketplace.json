@@ -1,0 +1,20 @@
+{
+  "name": "ai-lens",
+  "owner": {
+    "name": "Jaison"
+  },
+  "description": "Jaison's personal Claude Code plugin marketplace.",
+  "plugins": [
+    {
+      "name": "scan-codebase-observability",
+      "displayName": "Codebase Observability Scanner",
+      "source": "./plugins/scan-codebase-observability",
+      "description": "Analyzes a codebase and instruments it for LLM/agent observability using Langfuse — detects existing setup, installs and configures the SDK with PII masking, inventories native Langfuse metrics, and builds goal-driven custom evals (including a reference-free strategy when no golden dataset exists), then generates a reference doc mapping every metric to where to find it in Langfuse.",
+      "author": {
+        "name": "Jaison",
+        "email": "jaisonsamuel.d@latentview.com"
+      },
+      "keywords": ["observability", "langfuse", "llm-evals", "tracing", "monitoring", "agents"]
+    }
+  ]
+}

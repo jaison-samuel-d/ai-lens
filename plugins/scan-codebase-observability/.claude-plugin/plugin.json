@@ -6,11 +6,6 @@
     "name": "Jaison",
     "email": "jaisonsamuel.d@latentview.com"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/jaison-samuel-d/ai-lens.git"
-  },
-  "license": "MIT",
   "keywords": [
     "observability",
     "langfuse",
