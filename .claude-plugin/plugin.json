@@ -1,0 +1,22 @@
+{
+  "name": "scan-codebase-observability",
+  "version": "1.0.0",
+  "description": "Analyzes a codebase and instruments it for LLM/agent observability using Langfuse — detects existing setup, installs and configures the SDK with PII masking, inventories native Langfuse metrics, and builds goal-driven custom evals (including a reference-free strategy when no golden dataset exists), then generates a reference doc mapping every metric to where to find it in Langfuse.",
+  "author": {
+    "name": "Jaison",
+    "email": "jaisonsamuel.d@latentview.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jaison-samuel-d/scan-codebase-observability.git"
+  },
+  "license": "MIT",
+  "keywords": [
+    "observability",
+    "langfuse",
+    "llm-evals",
+    "tracing",
+    "monitoring",
+    "agents"
+  ]
+}

@@ -1,0 +1,17 @@
+# Phase F — Validate
+
+Don't skip this because the previous phases "should have worked." Instrumentation that silently doesn't fire is worse than no instrumentation, because it creates false confidence.
+
+**Read logs from wherever Phase A found they actually go.** Console output can be misleading if the app routes everything to a file or another structured sink — don't conclude a step failed just because an expected line never appeared in the terminal.
+
+Check each of these concretely, not by inspecting the code and assuming it's correct:
+
+1. **Traces actually land in Langfuse.** Fire a real (or realistic synthetic) request through the instrumented path and confirm a trace appears with the expected spans — not just that the SDK call didn't throw an exception.
+2. **Masking genuinely redacts.** Send a request containing a synthetic PII string (a fake but realistic-looking email, phone number, or whatever's relevant to this codebase's domain) through the traced path and confirm it does not appear in the stored trace content. Do this for tool-call arguments and results too, not only chat message content — masking that only covers one and not the other is a common and easy-to-miss gap.
+3. **Custom scores are actually delivered, not just accepted without error.** Many scoring/tracing SDK calls are asynchronous, queued, or fire-and-forget — the call returning without raising an exception is **not** evidence the score reached the platform; a background worker can fail to deliver it with nothing surfacing at the call site. Confirm real delivery before trusting it: look for the SDK's own delivery-confirmation log line (e.g. a "successfully sent N events"-style message at debug level), or query the platform's read API directly for the score you just pushed. Only then confirm it's attached to the correct trace/observation, not orphaned or attached to the wrong ID. Treat "no exception was raised" and "confirmed delivered" as two separate checks, not one.
+4. **Evaluators are calibrated, and calibration status is accurately recorded.** For each evaluator built in Phase D, confirm the Phase D3 calibration state (fully calibrated against a mature dataset, or provisional against a thin annotated sample) is correctly reflected wherever it's reported — don't let a provisional evaluator get described as calibrated by omission.
+5. **LLM-as-judge (Tier 2) evaluators are actually configured and running, not just written.** A rubric prompt file existing in the repo proves the code side is ready — it says nothing about whether the corresponding evaluator has actually been configured and activated wherever this platform runs judges, which is often a separate UI-side or API-side step outside the code you write. Verify this explicitly (via the platform's API/CLI if one exists) before reporting a Tier 2 evaluator as "built" or "running" based on the prompt file alone.
+6. **The existing test suite still passes** after the instrumentation changes. Instrumentation should be close to invisible to application behavior; if tests broke, something about the instrumentation is more invasive than it should be.
+7. **Fail-open behavior actually holds.** If practical, simulate Langfuse being unreachable (point the client at an unreachable endpoint, or use a test double) and confirm the application keeps serving requests rather than blocking or erroring.
+
+If any of these fail, fix the underlying issue before moving to Phase G — don't generate a reference document describing a setup that doesn't actually work yet.
