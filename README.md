@@ -51,7 +51,7 @@ This repo is a single Claude Code plugin (no `marketplace.json` needed). From
 Claude Code:
 
 ```
-/plugin marketplace add jaison-samuel-d/scan-codebase-observability
+/plugin marketplace add jaison-samuel-d/ai-lens
 /plugin install scan-codebase-observability
 ```
 
