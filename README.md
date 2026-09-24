@@ -1,4 +1,4 @@
-# ai-lens
+# scan-codebase-observability
 
 Jaison's personal Claude Code plugin marketplace. One plugin published so far:
 
@@ -12,7 +12,7 @@ In Claude Code:
 
 ```
 /plugin marketplace add jaison-samuel-d/ai-lens
-/plugin install scan-codebase-observability@ai-lens
+/plugin install scan-codebase-observability@scan-codebase-observability
 ```
 
 Each plugin still needs its own one-time setup (API keys, dependencies) —
